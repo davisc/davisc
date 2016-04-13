@@ -91,7 +91,7 @@ geolocation.on('error', function(error) {
         positionFeature.setGeometry(coordinates ?
             new ol.geom.Point(coordinates) : null);
             
-        map.getView().fit(coordinates, map.getSize());
+       // map.getView().fit(coordinates, map.getSize());
       });
      new ol.layer.Vector({
         map: map,
