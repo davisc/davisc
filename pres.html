@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MapTime: Location Matters</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      
+      img[alt=geofence] { width: 70%; }
+      img[alt=location] { height: 70%; width: 80%; }
+      img[alt=geolocation] { margin: auto; width: 100%; padding: 10px;}
+      img[alt=people] { margin: auto; width: 100%; padding: 10px;}
+      
+      img[alt=cordova] { height: 100px; width: 200px; }
+      img[alt=reactive] { height: 100px; width: 100px; }
+      img[alt=ol3] { height: 72px; width: 200px; }
+      img[alt=ios] { height: 100px; width: 200px; }
+ 
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Maptime: Location Matters
+Clarence Davis
+Wed Apr 13 at 6:00PM
+
+![location](mapbox.png)
+---
+
+# Agenda
+
+1. Introduction
+2. What is geolocation?
+3. How is location used during authentication?
+4. How is location used during authorization?
+5. Does location really matter?
+6. Discussion
+
+---
+
+# Introduction
+
+* if a mobile phone is generally found on or near its owner roughly 24 hours a day, then that mobile device could act as a “proxy” for that individual – and could be a highly credible source for authenticating an activity.
+
+![people](peopleonphone.jpg)
+
+---
+
+# What is geolocation?
+
+is the identification of the real-world geographic location of an object, such as a radar source, mobile phone or Internet-connected computer terminal. 
+
+https://en.wikipedia.org/wiki/Geolocation
+
+![geolocation](geolocation.jpg)
+
+---
+
+# How is location used during authentication?
+
+* Multi-factor Authentication
+* Two-factor Authentication
+* Fraud Detection
+* Risk Evaluation
+
+![authn](authn.png)
+
+---
+
+# How is location used during authorization?
+
+* restrict or enable access to services or content
+* Geo-fencing
+  * notifications
+  * no fly zones
+  * trigger events
+
+![geofence](geofencing.png)
+
+---
+
+# What are some frameworks or tools that support location?
+
+* Apache Cordova
+* React Native
+* OpenLayers
+* iOS
+* Android
+
+![cordova](cordova.png)
+![reactive](reactive-native.png)
+![ol3](ol3.png)
+![ios](iosandroid.jpeg)
+
+.footnote[.red.bold[*] Most Modern WebSDKs]
+
+---
+
+# Does location really matter?
+
+* It depends...
+
+---
+
+# Conclusion?
+
+* geolocation works very well as an added factor in reducing denials of legitimate transactions, however, it must be combined with other mobile factors to make it a stronger credible source. 
+
+---
+
+# Discussion
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
