@@ -98,10 +98,12 @@ geolocation.on('error', function(error) {
         positionFeature.setGeometry(coordinates ?
             new ol.geom.Point(coordinates) : null);
       });
-var featuresOverlay = new ol.FeatureOverlay({
-  map: map,
-  features: [accuracyFeature, positionFeature]
-});
+     new ol.layer.Vector({
+        map: map,
+        source: new ol.source.Vector({
+          features: [accuracyFeature, positionFeature]
+        })
+      });
       // ol.style.Fill, ol.style.Icon, ol.style.Stroke, ol.style.Style and
       // ol.style.Text are required for createMapboxStreetsV6Style()
     </script>
