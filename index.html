@@ -1,107 +1,132 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Location Matters</title>
-    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.0/css/ol.css" type="text/css">
-    <script src="http://openlayers.org/en/v3.15.0/build/ol.js"></script>
-    <script src="http://openlayers.org/en/v3.15.0/examples/resources/mapbox-streets-v6-style.js"></script>
+    <title>MapTime: Location Matters</title>
+    <meta charset="utf-8">
     <style>
-      .map {
-        background: #f8f4f0;
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
       }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      
+      img[alt=geofence] { width: 70%; }
+      img[alt=location] { height: 70%; width: 80%; }
+      img[alt=geolocation] { margin: auto; width: 100%; padding: 10px;}
+      img[alt=people] { margin: auto; width: 100%; padding: 10px;}
+      
+      img[alt=cordova] { height: 100px; width: 200px; }
+      img[alt=reactive] { height: 100px; width: 100px; }
+      img[alt=ol3] { height: 72px; width: 200px; }
+      img[alt=ios] { height: 100px; width: 200px; }
+ 
     </style>
   </head>
   <body>
-    <div id="map" class="map"></div>
-      <div id="info" style="display: none;"></div>
-    <label for="track">
-      track position
-      <input id="track" type="checkbox"/>
-    </label>
-    <p>
-      position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
-      altitude : <code id="altitude"></code>&nbsp;&nbsp;
-      altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
-      heading : <code id="heading"></code>&nbsp;&nbsp;
-      speed : <code id="speed"></code>
-    </p>
+    <textarea id="source">
+
+class: center, middle
+
+# Maptime: Location Matters
+Clarence Davis
+Wed Apr 13 at 6:00PM
+
+![location](mapbox.png)
+---
+
+# Agenda
+
+1. Introduction
+2. What is geolocation?
+3. How is location used during authentication?
+4. How is location used during authorization?
+5. Does location really matter?
+6. Discussion
+
+---
+
+# Introduction
+
+* if a mobile phone is generally found on or near its owner roughly 24 hours a day, then that mobile device could act as a “proxy” for that individual – and could be a highly credible source for authenticating an activity.
+
+![people](peopleonphone.jpg)
+
+---
+
+# What is geolocation?
+
+is the identification of the real-world geographic location of an object, such as a radar source, mobile phone or Internet-connected computer terminal. 
+
+https://en.wikipedia.org/wiki/Geolocation
+
+![geolocation](geolocation.jpg)
+
+---
+
+# How is location used during authentication?
+
+* Multi-factor Authentication
+* Two-factor Authentication
+* Fraud Detection
+* Risk Evaluation
+
+![authn](authn.png)
+
+---
+
+# How is location used during authorization?
+
+* restrict or enable access to services or content
+* Geo-fencing
+  * notifications
+  * no fly zones
+  * trigger events
+
+![geofence](geofencing.png)
+
+---
+
+# What are some frameworks or tools that support location?
+
+* Apache Cordova
+* React Native
+* OpenLayers
+* iOS
+* Android
+
+![cordova](cordova.png)
+![reactive](reactive-native.png)
+![ol3](ol3.png)
+![ios](iosandroid.jpeg)
+
+.footnote[.red.bold[*] Most Modern WebSDKs]
+
+---
+
+# Does location really matter?
+
+* It depends...
+
+---
+
+# Conclusion?
+
+* geolocation works very well as an added factor in reducing denials of legitimate transactions, however, it must be combined with other mobile factors to make it a stronger credible source. 
+
+---
+
+# Discussion
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
     <script>
-      var key = 'pk.eyJ1IjoiY2xkYXZpc2pyIiwiYSI6ImNpbXk4MnU0dDAzem52N2trYnVyeWx3MDMifQ.XVPV09UGiI4y-psgCiZv0w';
-var view = new ol.View({
-  center: [0, 0],
-  zoom: 2
-});
-      var map = new ol.Map({
-        layers: [
-          new ol.layer.VectorTile({
-            source: new ol.source.VectorTile({
-              attributions: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> ' +
-                '© <a href="http://www.openstreetmap.org/copyright">' +
-                'OpenStreetMap contributors</a>',
-              format: new ol.format.MVT(),
-              tileGrid: ol.tilegrid.createXYZ({maxZoom: 22}),
-              tilePixelRatio: 16,
-              url: 'http://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/' +
-                  '{z}/{x}/{y}.vector.pbf?access_token=' + key
-            }),
-            style: createMapboxStreetsV6Style()
-          })
-        ],
-        target: 'map',
-        view: view
-      });
-      
-      var geolocation = new ol.Geolocation({
-  projection: view.getProjection()
-});
-function el(id) {
-        return document.getElementById(id);
-      }
-
-      el('track').addEventListener('change', function() {
-        geolocation.setTracking(this.checked);
-      });
-
-// update the HTML page when the position changes.
-geolocation.on('change', function() {
-  console.log('#accuracy' + geolocation.getAccuracy() + ' [m]');
-  console.log('#altitude' + geolocation.getAltitude() + ' [m]');
-  console.log('#altitudeAccuracy' + geolocation.getAltitudeAccuracy() + ' [m]');
-  console.log('#heading' + geolocation.getHeading() + ' [rad]');
-  console.log('#speed' + geolocation.getSpeed() + ' [m/s]');
-});
-
-geolocation.on('error', function(error) {
-  console.log(error.message);
-});
-
-      var accuracyFeature = new ol.Feature();
-      geolocation.on('change:accuracyGeometry', function() {
-        accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-      });
-
-      var positionFeature = new ol.Feature();
-      positionFeature.setStyle(new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 6,
-          fill: new ol.style.Fill({
-            color: '#3399CC'
-          }),
-          stroke: new ol.style.Stroke({
-            color: '#fff',
-            width: 2
-          })
-        })
-      }));
-   geolocation.on('change:position', function() {
-        var coordinates = geolocation.getPosition();
-        positionFeature.setGeometry(coordinates ?
-            new ol.geom.Point(coordinates) : null);
-      });
-var featuresOverlay = new ol.FeatureOverlay({
-  map: map,
-  features: [accuracyFeature, positionFeature]
-});
+      var slideshow = remark.create();
     </script>
   </body>
 </html>
