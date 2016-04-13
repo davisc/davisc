@@ -90,6 +90,8 @@ geolocation.on('error', function(error) {
         var coordinates = geolocation.getPosition();
         positionFeature.setGeometry(coordinates ?
             new ol.geom.Point(coordinates) : null);
+            
+        map.getView().fit(positionFeature.getExtent(), map.getSize());
       });
      new ol.layer.Vector({
         map: map,
