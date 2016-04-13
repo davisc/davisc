@@ -18,13 +18,6 @@
       track position
       <input id="track" type="checkbox"/>
     </label>
-    <p>
-      position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
-      altitude : <code id="altitude"></code>&nbsp;&nbsp;
-      altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
-      heading : <code id="heading"></code>&nbsp;&nbsp;
-      speed : <code id="speed"></code>
-    </p>
     <script>
       var key = 'pk.eyJ1IjoiY2xkYXZpc2pyIiwiYSI6ImNpbXk4MnU0dDAzem52N2trYnVyeWx3MDMifQ.XVPV09UGiI4y-psgCiZv0w';
 var view = new ol.View({
@@ -64,11 +57,11 @@ function el(id) {
 
 // update the HTML page when the position changes.
 geolocation.on('change', function() {
-  console.log('#accuracy' + geolocation.getAccuracy() + ' [m]');
-  console.log('#altitude' + geolocation.getAltitude() + ' [m]');
-  console.log('#altitudeAccuracy' + geolocation.getAltitudeAccuracy() + ' [m]');
-  console.log('#heading' + geolocation.getHeading() + ' [rad]');
-  console.log('#speed' + geolocation.getSpeed() + ' [m/s]');
+  console.log('accuracy ' + geolocation.getAccuracy() + ' [m]');
+  console.log('altitude ' + geolocation.getAltitude() + ' [m]');
+  console.log('altitudeAccuracy ' + geolocation.getAltitudeAccuracy() + ' [m]');
+  console.log('heading ' + geolocation.getHeading() + ' [rad]');
+  console.log('speed ' + geolocation.getSpeed() + ' [m/s]');
 });
 
 geolocation.on('error', function(error) {
@@ -104,8 +97,7 @@ geolocation.on('error', function(error) {
           features: [accuracyFeature, positionFeature]
         })
       });
-      // ol.style.Fill, ol.style.Icon, ol.style.Stroke, ol.style.Style and
-      // ol.style.Text are required for createMapboxStreetsV6Style()
+ 
     </script>
   </body>
 </html>
